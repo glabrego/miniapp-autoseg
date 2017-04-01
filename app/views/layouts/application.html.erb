@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MiniAp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+        <% if notice %>
+            <div class="alert alert-info"><%= notice %></div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+        <% end %>
+        <% if alert %>
+            <div class="alert alert-warning"><%= alert %></div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+        <% end %>
+        <%= yield %>
+    </div> 
+  </body>
+</html>
