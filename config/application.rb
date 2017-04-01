@@ -16,8 +16,8 @@ module MiniAp
     	:address             => 'smtp.gmail.com',
     	:domain              => 'mail.google.com',
     	:port                => 587,
-    	:user_name           => "miniap_aram@gmail.com",
-    	:password            => "senha",
+    	:user_name           => "miniapp.aram@gmail.com",
+    	:password            => "auto4551",
     	:authentication      => 'login',
     	:enable_stattls_auto => true
     }
