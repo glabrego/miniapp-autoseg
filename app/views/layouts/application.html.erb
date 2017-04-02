@@ -12,9 +12,9 @@
     <%= nav_bar brand: "Mini Ap" do %>
         <%= menu_group do %>
             <% if user_signed_in? %>
-                <%= menu_item "Lists" %>
+                <%= menu_item "New List", new_list_path %>
                 <%= menu_item "Starred" %>
-                <%= menu_item current_user.name, edit_user_registration_path %> 
+                <%= menu_item current_user.email, edit_user_registration_path %> 
                 <%= menu_item "Logout", destroy_user_session_path, method: :delete %>
             <% else %>
                 <%= menu_item "Sign up", new_user_registration_path %>
@@ -25,7 +25,7 @@
     <div class="container">
         <% if notice %>
             <div class="alert alert-info"><%= notice %>
-            	<button type="button" class="close" data-dismiss="notice" aria-label="Close">x</button>
+            	<button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
             </div>            
         <% end %>
         <% if alert %>
