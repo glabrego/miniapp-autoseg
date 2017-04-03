@@ -14,6 +14,7 @@ class ListsController < ApplicationController
 
   def new
   	@list = List.new
+    @list.todos.new
   end
 
   def edit
@@ -21,11 +22,12 @@ class ListsController < ApplicationController
 
   def create
   	@list = current_user.lists.new(list_params)
+    @list.todos.first.user_id = current_user.id
 
   	if @list.save
   		redirect_to root_path, notice: "List was successfuly created!"
   	else
-  		redirect_to :new
+  		render action: :new
   	end
   end
 
@@ -33,7 +35,7 @@ class ListsController < ApplicationController
   	if @list.update(list_params)
   	    redirect_to @list, notice: "List was successfuly updated!"
   	else
-  		redirect_to :edit
+  		render action: :edit
   	end
   end
 
@@ -53,7 +55,7 @@ class ListsController < ApplicationController
   end
 
   def list_params
-  	params.require(:list).permit(:title, :public, :close)
+  	params.require(:list).permit(:title, :public, :close, todos_attributes: [:task, :close, :user_id]  )
   end
 
 end

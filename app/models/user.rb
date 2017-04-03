@@ -1,6 +1,9 @@
 class User < ApplicationRecord
-  
+
+	
   has_many :lists, dependent: :destroy
+  has_many :todos, dependent: :destroy
+  
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

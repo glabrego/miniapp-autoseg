@@ -13,6 +13,7 @@
 				    		<td><%= list.title %></td>
 				    		<td><%= @users.find(list.user_id).email %></td>
 				    		<td><%= list.created_at %></td>
+				    		<td><%= link_to "View", show_list_path(list), class: "btn btn-primary" %></td>
 			    		</tr>
 			    	<% end %>
 				<% end %>

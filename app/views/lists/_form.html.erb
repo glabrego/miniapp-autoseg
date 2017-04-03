@@ -9,12 +9,21 @@
             <%= f.label :title %>
             <%= f.text_field :title, class: "form-control" %>
         </div>
+
+        <%= f.fields_for :todos do |p| %>
+            <div class="form-group">
+                <%= p.label :task %>
+                <%= p.text_area :task, rows: 5, class: "form-control" %>
+            </div>
+        <% end %>
+
         <div class="form-group">
             <%= f.label :public, "Make public?" %>
             <%= f.check_box :public %>
         </div>
         <div class="form-group">
         <%= f.submit button_text, class: "btn btn-primary" %>
+        
         </div>
         
     <% end %>
