@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   
-  before_action :set_list, only: [:show, :edit, :update, :destroy, :list_closed?, :list_public?]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :is_closed?]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -32,10 +32,11 @@ class ListsController < ApplicationController
   end
 
   def update
+    
   	if @list.update(list_params)
-  	    redirect_to @list, notice: "List was successfuly updated!"
+  	 redirect_to @list, notice: "List was successfuly updated!"
   	else
-  		render action: :edit
+  	 render action: :edit
   	end
   end
 
@@ -55,7 +56,7 @@ class ListsController < ApplicationController
   end
 
   def list_params
-  	params.require(:list).permit(:title, :public, :close, todos_attributes: [:task, :close, :user_id]  )
+  	params.require(:list).permit(:title, :public, :close, todos_attributes: [:task, :close]  )
   end
 
 end
