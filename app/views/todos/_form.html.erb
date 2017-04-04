@@ -1,7 +1,0 @@
-<%= form_for([@list, @list.todos.build]) do |f| %>
-    <div class="form-group">
-        <%= f.label :task %>
-        <%= f.text_area :task, rows: 5, class: "form-control" %>
-        <%= f.submit %>
-    </div>
-<% end %>

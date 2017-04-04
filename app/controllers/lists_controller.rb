@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   
-  before_action :set_list, only: [:show, :edit, :update, :destroy, :is_closed?]
+  before_action :set_list, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -21,11 +21,12 @@ class ListsController < ApplicationController
   end
 
   def create
-  	@list = current_user.lists.new(list_params)
-    @list.todos.first.user_id = current_user.id
+    @list = current_user.lists.new list_params
+  	@list.todos.first.user_id = current_user.id
 
   	if @list.save
-  		redirect_to root_path, notice: "List was successfuly created!"
+
+  		redirect_to @list, notice: "List was successfuly created!"
   	else
   		render action: :new
   	end
@@ -56,7 +57,7 @@ class ListsController < ApplicationController
   end
 
   def list_params
-  	params.require(:list).permit(:title, :public, :close, todos_attributes: [:list_id, :task, :close, :user_id]  )
+  	params.require(:list).permit(:title, :public, :close, todos_attributes: [:user_id, :list_id, :task, :close]  )
   end
 
 end

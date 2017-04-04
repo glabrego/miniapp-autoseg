@@ -15,7 +15,7 @@
         <%= f.fields_for :todos do |p| %>
             <div class="form-group">
                 <%= p.label :task %>
-                <%= p.text_area :task, rows: 5, class: "form-control" %>
+                <%= p.text_field :task, class: "form-control" %>
             </div>
         <% end %>
 
