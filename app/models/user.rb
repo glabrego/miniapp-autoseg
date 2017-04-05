@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-
 	
   has_many :lists, dependent: :destroy
   has_many :todos, dependent: :destroy
+  belongs_to :favourite, optional: true
   
 
   # Include default devise modules. Others available are:

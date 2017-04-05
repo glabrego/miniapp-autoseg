@@ -1,5 +1,3 @@
 <td>
-    <%= link_to path, method: :delete, data: {confirm: "Are you sure you want to remove this list?"} do %>
-        <i class="fa fa-lf fa-trash"></i>
-    <% end %>
+    <%= link_to "Delete", path, method: :delete, data: {confirm: "Are you sure you want to remove this list?"}, class: "btn btn-danger pull-right", role: "btn" %>
 </td> 

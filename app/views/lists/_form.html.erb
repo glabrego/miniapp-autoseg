@@ -11,9 +11,6 @@
         <%= f.label :title %>
         <div class="form-inline">
             <%= f.text_field :title, class: "form-control" %>
-            <% if @list.user_id == current_user.id && user_signed_in? %>
-                <%= render "delete_button", path: @list %>     
-            <% end %>
         </div>
     </div>
     <br>
@@ -26,12 +23,9 @@
         <tbody class="fields">
                 <%= f.fields_for :todos do |p| %>
                     <%= render "todo_fields", f: p %>
-                    <% if @list.user_id == current_user.id && user_signed_in? %>
-                        <td>
-                            <%= f.hidden_field :_destroy %>
-                            <%= link_to  "Delete",'#', class: 'remove_record' %><i class="fa fa-lf fa-trash"></i>
-                        </td>
-                    <% end %>
+                    <td><%= p.hidden_field :_destroy %>
+                        <a href="" class="remove_record" type="button"><i class="fa fa-lf fa-trash"></i></a>
+                    </td>
                     </tr>            
                 <% end %>
         </tbody>
@@ -40,8 +34,12 @@
         <%= f.label :public, "Make public" %>
         <%= f.check_box :public %>
     </div>
-    <div class="form-actions">
-        <%= f.submit button_text, class: "btn btn-primary" %>  
+    <div class="form-actions" align="center">
+        <%= render "back_button", route: show_list_path(@list) %>
         <%= link_to_add_row("Add", f, :todos, class: "btn btn-primary") %>
+        <%= f.submit button_text, class: "btn btn-primary" %>  
+        <% if @list.user_id == current_user.id && user_signed_in? %>
+            <%= render "delete_button", path: @list %>     
+        <% end %>
     </div>
 <% end %>

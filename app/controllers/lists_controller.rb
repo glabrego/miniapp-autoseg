@@ -18,7 +18,6 @@ class ListsController < ApplicationController
   end
 
   def edit
-
   end
 
   def create
