@@ -1,3 +1,9 @@
 <tr>
+	<td><%= f.hidden_field :close, class: "close_task" %>
+	    <a href="" class="close_task" type="button"><i class="fa fa-lf fa-check"></i></a>
+    </td>
 	<td><%= f.text_field :task, class: "form-control" %></td>
-	
+    <td><%= f.hidden_field :_destroy, class: "remove" %>
+        <a href="" class="remove_record" type="button"><i class="fa fa-lf fa-trash"></i></a>
+    </td>
+</tr>  

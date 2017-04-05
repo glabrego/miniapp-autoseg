@@ -17,17 +17,14 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Close</th>
                 <th>Task</th>
             </tr>
         </thead>
         <tbody class="fields">
-                <%= f.fields_for :todos do |p| %>
-                    <%= render "todo_fields", f: p %>
-                    <td><%= p.hidden_field :_destroy %>
-                        <a href="" class="remove_record" type="button"><i class="fa fa-lf fa-trash"></i></a>
-                    </td>
-                    </tr>            
-                <% end %>
+            <%= f.fields_for :todos do |p| %>
+                <%= render "todo_fields", f: p %>
+            <% end %>
         </tbody>
     </table>
     <div class="form-inputs">
@@ -35,7 +32,8 @@
         <%= f.check_box :public %>
     </div>
     <div class="form-actions" align="center">
-        <%= render "back_button", route: show_list_path(@list) %>
+        <% button_text == "Update" ? route = show_list_path(@list) : route = root_path %> 
+        <%= render "back_button", route: route %>
         <%= link_to_add_row("Add", f, :todos, class: "btn btn-primary") %>
         <%= f.submit button_text, class: "btn btn-primary" %>  
         <% if @list.user_id == current_user.id && user_signed_in? %>

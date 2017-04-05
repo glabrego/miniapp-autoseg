@@ -29,18 +29,17 @@
             </thead>
             <tbody>
                 <% @list.todos.each do |todo| %>
-                    <%= form_for @list.todo do |p| %>
-                        <tr>
-                            <td><%= f.check_box :close %></td>
+                    <% if todo.close %>
+                        <tr style="opacity: 0.4">
                             <td><%= todo.task %></td>
                             <td><%= todo.created_at %></td>
                             <td><%= todo.updated_at %></td>
-                            <% if @list.user_id == current_user.id && user_signed_in? %>
-                                <td>
-                                    <%= p.hidden_field :_destroy %>   
-                                    <a href="" class="remove_record" type="button"><i class="fa fa-lf fa-trash"></i></a>
-                                </td>
-                            <% end %>
+                        </tr>
+                    <% else %>
+                        <tr>
+                            <td><%= todo.task %></td>
+                            <td><%= todo.created_at %></td>
+                            <td><%= todo.updated_at %></td>
                         </tr>
                     <% end %>
                 <% end %>
