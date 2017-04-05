@@ -14,15 +14,18 @@ class ListsController < ApplicationController
 
   def new
   	@list = List.new
-    @list.todos.new
+    @list.todos.build
   end
 
   def edit
+
   end
 
   def create
     @list = current_user.lists.new list_params
-  	@list.todos.first.user_id = current_user.id
+  	@list.todos.each do |todo|
+      todo.user_id = current_user.id
+    end
 
   	if @list.save
 
@@ -33,17 +36,20 @@ class ListsController < ApplicationController
   end
 
   def update
-    
-  	if @list.update(list_params)
-  	 redirect_to @list, notice: "List was successfuly updated!"
-  	else
-  	 render action: :edit
+    respond_to do |format|
+  	  if @list.update(list_params)
+  	    format.html { redirect_to @list, notice: "List was successfuly updated!" }
+        format.json {render :show, status: :ok, location: @list }
+    	else
+  	    format.html {render :edit }
+        format.json {render json: @list.errors, status: :unprocessable_entity }
+      end
   	end
   end
 
   def destroy
   	@list.destroy
-  	redirect_to lists_url, notice: "List was successfuly destroyed!"
+  	redirect_to lists_url, notice: "List was successfuly removed!"
   end
 
   def is_closed?
@@ -57,7 +63,7 @@ class ListsController < ApplicationController
   end
 
   def list_params
-  	params.require(:list).permit(:title, :public, :close, todos_attributes: [:user_id, :list_id, :task, :close]  )
+  	params.require(:list).permit(:title, :public, :close, todos_attributes: [:id, :user_id, :list_id, :task, :close, :_destroy]  )
   end
 
 end

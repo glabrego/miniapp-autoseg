@@ -1,5 +1,5 @@
 class List < ApplicationRecord
-	belongs_to :user
+	belongs_to :user, optional: true
 	has_many :todos, inverse_of: :list, dependent: :destroy
 	accepts_nested_attributes_for :todos, allow_destroy: true
 

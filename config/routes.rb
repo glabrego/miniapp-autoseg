@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
     
-    resources :lists
+    resources :lists do
+    	resources :todos
+    end
 
     get "/lists/:id/edit" => "lists#edit"
 
     get "/lists/:id" => "lists#show", as: :show_list
-  
-    get "/lists/index" => "lists#index"
-
+      
     root "lists#index"
     
     devise_for :users, controllers: { registrations: "registrations" }

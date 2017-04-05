@@ -16,7 +16,7 @@
 				    		<td><%= link_to "View", show_list_path(list), class: "btn btn-primary", role: "btn" %></td>
 				    		<% if user_signed_in? && current_user.id == list.user_id %>
 				    			<td><%= link_to "Edit", edit_list_path(list), class: "btn btn-default", role: "btn" %></td>
-				    			<td><%= link_to list, method: :delete, data: {confirm: "Are you sure you want to remove #{list.title}?"} do %><i class="fa fa-lf fa-trash"></i> <% end %></td>
+				    			<%= render "delete_button", path: list %>
 				    		<% end %>
 			    		</tr>
 			    	<% end %>

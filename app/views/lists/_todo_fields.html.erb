@@ -1,0 +1,8 @@
+<div class="form-group">
+    <%= f.label :task %>
+    <%= f.text_field :task, class: "form-control" %>
+    <td>
+    	<%= f.submit :_destroy, as: :hidden %>
+    	<%= link_to "Delete", '#', class: 'remove_record' %>
+    </td>
+</div>

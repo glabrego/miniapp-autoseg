@@ -13,8 +13,8 @@
         <td><%= @list.created_at %></td>
     </ul>
     <ul>
-        <td><strong>Updated at:</strong></td>
-        <td><%= @list.updated_at %></td>
+        <td><strong>Last update:</strong></td>
+        <td><%= @list.updated_at > @list.todos.order("updated_at").last.updated_at ? @list.updated_at : @list.todos.order("updated_at").last.updated_at %></td>
     </ul>
 </div>
 <br/>
@@ -22,11 +22,20 @@
     <div>
         <h2>To Do's</h2>
         <% @list.todos.each do |todo| %>
-            <li><%= todo.task %></li>
+            <table class="table">
+                <thead>
+                    <th>Task:</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= todo.task %></td>
+                    </tr>
+                </tbody>
+            </table>
         <% end %>
     </div>
 <% end %>
 <% if user_signed_in? && current_user.id == @list.user_id %>
     <td><%= link_to "Edit", edit_list_path(@list), class: "btn btn-default", role: "btn" %></td>
-    <td><%= link_to @list, method: :delete, data: {confirm: "Are you sure you want to remove #{@list.title}?"} do %><i class="fa fa-lf fa-trash"></i> <% end %></td>
+    <%= render "delete_button", path: @list %>
 <% end %>
