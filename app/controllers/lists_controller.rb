@@ -63,7 +63,7 @@ class ListsController < ApplicationController
   end
 
   def list_params
-  	params.require(:list).permit(:title, :public, :close, todos_attributes: [:id, :user_id, :list_id, :task, :close, :_destroy]  )
+  	params.require(:list).permit(:title, :public, :close, todos_attributes: Todo.attribute_names.map(&:to_sym).push(:_destroy))
   end
 
 end

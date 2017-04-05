@@ -6,30 +6,42 @@
 <% end %>
 
 
-    <%= form_for @list do |f| %>
-        <div class="form-group">
-            <%= f.label :title %>
-            <div class="form-inline">
+<%= form_for @list do |f| %>
+    <div class="form-inputs">
+        <%= f.label :title %>
+        <div class="form-inline">
             <%= f.text_field :title, class: "form-control" %>
-            <% if button_text == "Update" %>
+            <% if @list.user_id == current_user.id && user_signed_in? %>
                 <%= render "delete_button", path: @list %>     
             <% end %>
-            </div>
         </div>
-
-        <%= f.fields_for :todos do |p| %>
-            <%= render "todo_fields", f: p %>            
-        <% end %>
-        
-
-        <div class="form-group">
-            <%= f.label :public, "Make public?" %>
-            <%= f.check_box :public %>
-
-        </div>
-        <div class="form-actions">
-            <%= f.submit button_text, class: "btn btn-primary" %>  
-            <%= link_to_add_row("Add", f, :todos, class: "btn btn-primary") %>
-        </div>
-        
-    <% end %>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task</th>
+            </tr>
+        </thead>
+        <tbody class="fields">
+                <%= f.fields_for :todos do |p| %>
+                    <%= render "todo_fields", f: p %>
+                    <% if @list.user_id == current_user.id && user_signed_in? %>
+                        <td>
+                            <%= f.hidden_field :_destroy %>
+                            <%= link_to  "Delete",'#', class: 'remove_record' %><i class="fa fa-lf fa-trash"></i>
+                        </td>
+                    <% end %>
+                    </tr>            
+                <% end %>
+        </tbody>
+    </table>
+    <div class="form-inputs">
+        <%= f.label :public, "Make public" %>
+        <%= f.check_box :public %>
+    </div>
+    <div class="form-actions">
+        <%= f.submit button_text, class: "btn btn-primary" %>  
+        <%= link_to_add_row("Add", f, :todos, class: "btn btn-primary") %>
+    </div>
+<% end %>

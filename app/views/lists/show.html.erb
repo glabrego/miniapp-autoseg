@@ -21,18 +21,27 @@
 <% if @list.todos.present? %>
     <div>
         <h2>To Do's</h2>
-        <% @list.todos.each do |todo| %>
-            <table class="table">
-                <thead>
-                    <th>Task:</th>
-                </thead>
-                <tbody>
+        <table class="table">
+            <thead>
+                <th>Task:</th>
+                <th>Created at:</th>
+                <th>Updated at:</th>
+            </thead>
+            <tbody>
+                <% @list.todos.each do |todo| %>
                     <tr>
                         <td><%= todo.task %></td>
+                        <td><%= todo.created_at %></td>
+                        <td><%= todo.updated_at %></td>
+                        <% if @list.user_id == current_user.id && user_signed_in? %>
+                            <td>                                
+                                <%= link_to  "Delete",'#', class: 'remove_record' %><i class="fa fa-lf fa-trash"></i>
+                            </td>
+                        <% end %> 
                     </tr>
-                </tbody>
-            </table>
-        <% end %>
+                <% end %>
+            </tbody>
+        </table>
     </div>
 <% end %>
 <% if user_signed_in? && current_user.id == @list.user_id %>
