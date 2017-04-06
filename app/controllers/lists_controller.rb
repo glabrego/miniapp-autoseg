@@ -62,11 +62,11 @@ class ListsController < ApplicationController
   def favourite
     type = params[:type]
     if type == "favourite"
-      @list.favourites << current_user
-      redirect_to :back
+      current_user.favourites << @list
+      redirect_to :back, notice: "Favourite"
     elsif type == "unfavourite"
-      @list.favourites.delete(current_user)
-      redirect_to :back
+      current_user.favourites.delete(@list)
+      redirect_to :back, notice: "Unfavourited"
     else
       redirect_to :back, notice: "Nothing happened."
     end

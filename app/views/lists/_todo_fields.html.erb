@@ -1,6 +1,9 @@
 <tr>
-	<td><%= f.check_box :close %></td>
-	<td><%= f.text_field :task, class: "form-control" %></td>
+    <% unless current_page?('/lists/new') %>
+		<td><%= f.check_box :close %></td>
+	<% end %>
+	<% !:new && :close ? disabled = true : disabled = false%>
+	<td><%= f.text_field :task, class: "form-control", readonly: disabled %></td>
     <td><%= f.hidden_field :_destroy, class: "remove" %>
         <a href="" class="remove_record" type="button"><i class="fa fa-lf fa-trash"></i></a>
     </td>

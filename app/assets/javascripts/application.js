@@ -18,11 +18,17 @@
 $(document).on('turbolinks:load', function() {
 
   $('form').on('click', '.remove_record', function(event) {
-    if (confirm("Are you sure you want do delete this task?")){
+    if (window.location.href != "http://localhost:3000/lists/new"){
+      if (confirm("Are you sure you want do delete this task?")){
+        $(this).prev('input[class=remove]').val('1');
+        $(this).closest('tr').hide();
+        return event.preventDefault();
+      };
+    } else {
       $(this).prev('input[class=remove]').val('1');
-      $(this).closest('tr').hide();
-      return event.preventDefault();
-    };
+        $(this).closest('tr').hide();
+        return event.preventDefault();
+      };
   });
 
 

@@ -15,7 +15,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Close</th>
+                <% unless current_page?('/lists/new') %>
+                    <th>Close</th>
+                <% end %>
                 <th>Task</th>
             </tr>
         </thead>
