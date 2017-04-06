@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     	put :favourite, on: :member
     end
 
-    resources :favourite_lists, onlye: [:create, :destroy]
+    resources :favourite_lists, only: [:index, :create, :destroy]
 
     get "/lists/:id/edit" => "lists#edit"
 

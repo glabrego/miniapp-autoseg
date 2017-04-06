@@ -8,8 +8,9 @@
 
 <%= form_for @list do |f| %>
     <div class="form-inputs">
+        <% @list.close ? disabled = true : disabled = false %>
         <%= f.label :title %>
-        <%= f.text_field :title, class: "form-control" %>
+        <%= f.text_field :title, class: "form-control", disabled: disabled %>
     </div>
     <br>
     <table class="table">
@@ -33,12 +34,11 @@
     </div>
     <br>
     <div class="form-actions" align="center">
-        <% button_text == "Update" ? route = show_list_path(@list) : route = root_path %> 
-        <%= render "back_button", route: route %>
+        <%= render "lists/back_button" %>
         <%= link_to_add_row("Add", f, :todos, class: "btn btn-primary") %>
         <%= f.submit button_text, class: "btn btn-primary" %>  
         <% if @list.user_id == current_user.id && user_signed_in? %>
-            <%= render "delete_button", path: @list %>     
+            <%= render "lists/delete_button", path: @list %>     
         <% end %>
     </div>
     <br>

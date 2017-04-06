@@ -10,4 +10,15 @@ class List < ApplicationRecord
 
 	validates :title, presence: true
 	validates_associated :todos
+
+def favourited?(list)
+    @favourited_lists = FavouriteList.all
+    @favourited_lists.each do |favourite_list|
+    	if list.id == favourite_list.list_id
+    		return true
+    	end
+    end
+    return false
+end
+
 end

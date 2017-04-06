@@ -14,7 +14,7 @@
         <%= menu_group do %>
             <% if user_signed_in? %>
                 <%= menu_item "New List", new_list_path %>
-                <%= menu_item "Starred" %>
+                <%= menu_item "Starred", favourite_lists_path %>
                 <%= menu_item current_user.name, edit_user_registration_path %> 
                 <%= menu_item "Logout", destroy_user_session_path, method: :delete %>
             <% else %>

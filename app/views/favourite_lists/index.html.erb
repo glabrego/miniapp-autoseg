@@ -1,0 +1,31 @@
+<h1>My Favourite Lists</h1>
+	<div class="container">
+    	<table class="table">
+	    	<thead>
+	    		<th>Favourites</th>
+		    	<th>Title</th>
+		    	<th>Author</th>
+		    	<th>Created at</th>
+	    	</thead>
+	    	<tbody>
+	    		<% @lists.each do |list| %>
+	    			<% @favourited_lists.each do |favourited_list| %>
+	    				<% if (favourited_list.user_id == current_user.id) && (favourited_list.list_id == list.id) %>
+							<tr>
+			    				<td><%= render "lists/favourites", list: list %></td>
+				    			<td><%= list.title %></td>
+				    			<td><%= @users.find(list.user_id).name %></td>
+				    			<td><%= list.created_at %></td>
+				    			<td><%= link_to "View", show_list_path(list), class: "btn btn-primary", role: "btn" %></td>
+				    			<% if !list.close %>
+				    				<td><%= link_to "Edit", edit_list_path(list), class: "btn btn-default", role: "btn" %></td>
+				    			<% end %>
+				    			<%= render "lists/delete_button", path: list %>
+			    			</tr>
+			    		<% end %>
+			    	<% end %>
+	    		<% end %>
+        	</tbody>
+    	</table>
+	</div>
+

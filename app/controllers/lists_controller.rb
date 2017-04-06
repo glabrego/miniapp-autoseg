@@ -1,11 +1,12 @@
 class ListsController < ApplicationController
   
   before_action :set_list, except: [:index, :new, :create]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index]
 
   def index
   	@lists = List.all
     @users = User.all
+    @favourited_lists = FavouriteList.all
   end
 
   def show
@@ -35,14 +36,7 @@ class ListsController < ApplicationController
   end
 
   def update
-    
-    @list.close = true
-    @list.todos.each do |todo|
-      if !todo.close
-        @list.close = false
-      end
-    end
-    
+        
     respond_to do |format|
   	  if @list.update(list_params)
   	    format.html { redirect_to @list, notice: "List was successfuly updated!" }
@@ -51,6 +45,14 @@ class ListsController < ApplicationController
   	    format.html {render :edit }
         format.json {render json: @list.errors, status: :unprocessable_entity }
       end
+
+      @list.close = true
+      @list.todos.each do |todo|
+        if !todo.close
+          @list.close = false
+        end
+      end
+      @list.update(list_params)
   	end
   end
 
@@ -63,10 +65,10 @@ class ListsController < ApplicationController
     type = params[:type]
     if type == "favourite"
       current_user.favourites << @list
-      redirect_to :back, notice: "Favourite"
+      redirect_to :back
     elsif type == "unfavourite"
       current_user.favourites.delete(@list)
-      redirect_to :back, notice: "Unfavourited"
+      redirect_to :back
     else
       redirect_to :back, notice: "Nothing happened."
     end
