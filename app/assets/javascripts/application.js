@@ -18,9 +18,11 @@
 $(document).on('turbolinks:load', function() {
 
   $('form').on('click', '.remove_record', function(event) {
-    $(this).prev('input[class=remove]').val('1');
-    $(this).closest('tr').hide();
-    return event.preventDefault();
+    if (confirm("Are you sure you want do delete this task?")){
+      $(this).prev('input[class=remove]').val('1');
+      $(this).closest('tr').hide();
+      return event.preventDefault();
+    };
   });
 
 

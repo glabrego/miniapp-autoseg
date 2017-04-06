@@ -2,6 +2,7 @@ Rails.application.routes.draw do
     
     resources :lists do
     	resources :todos
+    	put :favourite, on: :member
     end
 
     get "/lists/:id/edit" => "lists#edit"

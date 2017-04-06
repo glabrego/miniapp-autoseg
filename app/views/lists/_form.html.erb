@@ -9,9 +9,7 @@
 <%= form_for @list do |f| %>
     <div class="form-inputs">
         <%= f.label :title %>
-        <div class="form-inline">
-            <%= f.text_field :title, class: "form-control" %>
-        </div>
+        <%= f.text_field :title, class: "form-control" %>
     </div>
     <br>
     <table class="table">
@@ -28,9 +26,10 @@
         </tbody>
     </table>
     <div class="form-inputs">
-        <%= f.label :public, "Make public" %>
+        <%= f.label :public, "Make list public" %>
         <%= f.check_box :public %>
     </div>
+    <br>
     <div class="form-actions" align="center">
         <% button_text == "Update" ? route = show_list_path(@list) : route = root_path %> 
         <%= render "back_button", route: route %>
@@ -40,4 +39,6 @@
             <%= render "delete_button", path: @list %>     
         <% end %>
     </div>
+    <br>
+    <br>
 <% end %>

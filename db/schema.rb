@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405181511) do
+ActiveRecord::Schema.define(version: 20170405220301) do
 
   create_table "favourites", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "list_id"
+    t.integer  "user_id_id"
+    t.integer  "list_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["list_id_id"], name: "index_favourites_on_list_id_id"
+    t.index ["user_id_id"], name: "index_favourites_on_user_id_id"
   end
 
   create_table "lists", force: :cascade do |t|

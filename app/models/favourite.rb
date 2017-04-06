@@ -1,4 +1,4 @@
 class Favourite < ApplicationRecord
-	has_many :users
-	has_many :lists
+  belongs_to :user_id
+  belongs_to :list_id
 end

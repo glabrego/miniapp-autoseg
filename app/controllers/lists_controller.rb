@@ -35,6 +35,14 @@ class ListsController < ApplicationController
   end
 
   def update
+    
+    @list.close = true
+    @list.todos.each do |todo|
+      if !todo.close
+        @list.close = false
+      end
+    end
+    
     respond_to do |format|
   	  if @list.update(list_params)
   	    format.html { redirect_to @list, notice: "List was successfuly updated!" }
@@ -51,9 +59,19 @@ class ListsController < ApplicationController
   	redirect_to lists_url, notice: "List was successfuly removed!"
   end
 
-  def is_closed?
-  	@list.close
+  def favourite
+    type = params[:type]
+    if type == "favourite"
+      @list.favourites << current_user
+      redirect_to :back
+    elsif type == "unfavourite"
+      @list.favourites.delete(current_user)
+      redirect_to :back
+    else
+      redirect_to :back, notice: "Nothing happened."
+    end
   end
+      
 
   private
 

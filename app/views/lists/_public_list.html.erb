@@ -2,6 +2,7 @@
 	<div class="container">
 	    <table class="table">
 		    <thead>
+		    	<th>Favourites</th>
 			    <th>Title</th>
 			    <th>Author</th>
 			    <th>Created at</th>
@@ -10,6 +11,9 @@
 		    	<% @lists.each do |list| %>
 					<% if list.public %>
 			    		<tr>
+			    			<% if user_signed_in? %>
+			    				<td><%= render "favourites", object: list %></td>
+			    			<% end %>
 				    		<td><%= list.title %></td>
 				    		<td><%= @users.find(list.user_id).name %></td>
 				    		<td><%= list.created_at %></td>
