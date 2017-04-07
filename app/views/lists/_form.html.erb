@@ -7,13 +7,27 @@
 
 
 <%= form_for @list do |f| %>
-    <div class="form-inputs">
-        <% @list.close ? disabled = true : disabled = false %>
-        <%= f.label :title %>
-        <%= f.text_field :title, class: "form-control", disabled: disabled %>
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <% unless current_page?('/lists/new') %>
+                    <th>Close</th>
+                <% end %>
+                <th>List's Title</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <% unless current_page?('/lists/new') %>
+                        <td><%= f.check_box :close %></td>
+                    <% end %>
+                    <td><%= f.text_field :title, class: "form-control" %></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <br>
     <table class="table">
+        <div class="form-group">
         <thead>
             <tr>
                 <% unless current_page?('/lists/new') %>
@@ -40,6 +54,7 @@
         <% if @list.user_id == current_user.id && user_signed_in? %>
             <%= render "lists/delete_button", path: @list %>     
         <% end %>
+    </div>
     </div>
     <br>
     <br>

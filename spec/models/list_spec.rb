@@ -1,5 +1,11 @@
 require 'rails_helper'
+require 'support/validate_presence_of'
 
 RSpec.describe List, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+ it 'validates presence of title' do
+  	list = List.new(:title => nil)
+  	list.should validate_presence_of(:title)
+  end
+
 end

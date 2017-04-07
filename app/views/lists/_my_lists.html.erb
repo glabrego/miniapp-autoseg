@@ -16,9 +16,12 @@
 					<% if list.user_id == current_user.id && user_signed_in? %>
 		    			<tr>
 		    				<td><%= render "favourites", list: list %></td>
-			    			<td><%= list.title %></td>
-			    			<td><%= @users.find(list.user_id).name %></td>
-			    			<td><%= list.created_at %></td>
+		    				<% opacity = 0.6 if list.close %>
+		    				<div>
+				    			<td style="opacity: <%= opacity %>"><%= list.title %></td>
+				    			<td style="opacity: <%= opacity %>"><%= @users.find(list.user_id).name %></td>
+				    			<td style="opacity: <%= opacity %>"><%= list.created_at %></td>
+			    			</div>
 			    			<td><%= link_to "View", show_list_path(list), class: "btn btn-primary", role: "btn" %></td>
 			    				<td><% if !list.close %>
 			    					<%= link_to "Edit", edit_list_path(list), class: "btn btn-default", role: "btn" %></td>

@@ -4,6 +4,7 @@ class ListsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
+    
   	@lists = List.all
     @users = User.all
     @favourited_lists = FavouriteList.all
@@ -46,13 +47,18 @@ class ListsController < ApplicationController
         format.json {render json: @list.errors, status: :unprocessable_entity }
       end
 
-      @list.close = true
-      @list.todos.each do |todo|
-        if !todo.close
-          @list.close = false
+        if @list.close
+          @list.todos.each do |todo|
+            todo.update(close: true)
+          end
+        else
+          if @list.todos.where(close: false).count > 0 
+            @list.update(close: false)
+          else
+            @list.update(close:  true)
+          end
         end
-      end
-      @list.update(list_params)
+      
   	end
   end
 
