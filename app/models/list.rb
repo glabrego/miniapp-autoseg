@@ -11,11 +11,11 @@ class List < ApplicationRecord
 	validates :title, presence: true
 	validates_associated :todos
 
-  def favourited?(list)
+  def favourited?(list, user)
 
     @favourited_lists = FavouriteList.all
     @favourited_lists.each do |favourite_list|
-    	if list.id == favourite_list.list_id
+    	if list.id == favourite_list.list_id && user.id == favourite_list.user_id
     		return true
     	end
     end

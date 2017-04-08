@@ -1,4 +1,4 @@
-<% if list.favourited?(list) %>
+<% if list.favourited?(list, current_user) %>
 	<%= link_to favourite_list_path(list, type: "unfavourite"), method: :put, style: "color: gold" do %><i class="fa fa-star" aria-hidden="true"></i><% end %>
 <% else %>
 	<%= link_to favourite_list_path(list, type: "favourite"), method: :put, style: "color: gold" do %><i class="fa fa-star-o" aria-hidden="true"></i><% end %>
