@@ -1,0 +1,33 @@
+<% if type == "public_lists" %>
+	<h1>Public Lists</h1>
+<% else %>
+	<h1>My Lists</h1>
+<% end %>
+	<div class="container">
+	    <table class="table" id="<%= type %>">
+		    <thead>
+		    	<% if user_signed_in? %>
+		    		<th>Favourites</th>
+				<% end %>
+		        <th>Title</th>
+			    <th>Author</th>
+			    <th>Created at</th>
+			    <th></th>
+			    <th></th>
+			    <th></th>
+		    </thead>
+		    <tbody>
+		    	<% if type == "public_lists" %>
+		    	    <% @public_lists.each do |list| %>
+		    	    	<%= render "lists_fields", list: list %>
+		    	    <% end %>
+		    	<% else %>
+		    	    <% @my_lists.each do |list| %>
+		    	    	<%= render "lists_fields", list: list %>
+		    	    <% end %>
+		    	<% end %>
+	        </tbody>
+	    </table>
+	</div>
+	<br>
+	<br>

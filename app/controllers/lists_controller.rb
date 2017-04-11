@@ -4,7 +4,8 @@ class ListsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    
+    @public_lists = List.where(public: true)
+    @my_lists = List.where(user_id: current_user.id) if user_signed_in?
   	@lists = List.all
     @users = User.all
     @favourited_lists = FavouriteList.all

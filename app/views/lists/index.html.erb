@@ -1,4 +1,5 @@
-<%= render "public_list" %>
-
-<%= render "my_lists" %>
+<%= render "lists", type: "public_lists" %>
+<% if user_signed_in? %>
+	<%= render "lists", type: "my_lists" %>
+<% end %>
 

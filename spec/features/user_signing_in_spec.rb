@@ -9,13 +9,7 @@ feature "creating and deleting a list" do
     click_button "Log in"
   end
 
-  def fill_in_list_fields
-    fill_in "list[title]", with: "Test list"
-    fill_in  "list[todos_attributes][0][task]", with: "test task"
-    click_button "Add"
-    fill_in "list[todos_attributes][1][task]", with: "added task"
-    click_button "Create"
-  end
+
 
   scenario "visiting the site to sign in" do
     visit root_path
