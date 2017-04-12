@@ -1,8 +1,10 @@
 require 'rails_helper'
 require "support/list_steps"
+require "support/user_steps"
 
 RSpec.describe "Todo homepage", type: :feature do
 	include ListSteps
+	include UserSteps
 
 	it "shows the public lists" do
 		visit_homepage

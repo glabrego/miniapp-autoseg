@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
     
-  devise_for :testers
+
     resources :lists do
     	resources :todos
     	put :favourite, on: :member

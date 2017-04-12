@@ -4,8 +4,8 @@ class ListsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @public_lists = List.where(public: true)
-    @my_lists = List.where(user_id: current_user.id) if user_signed_in?
+    @public_lists = List.public_lists
+    @my_lists = List.my_lists(current_user) if user_signed_in?
   	@lists = List.all
     @users = User.all
     @favourited_lists = FavouriteList.all
@@ -77,7 +77,7 @@ class ListsController < ApplicationController
       current_user.favourites.delete(@list)
       redirect_to :back
     else
-      redirect_to :back, notice: "Nothing happened."
+      redirect_to :back, notice: "Could not favourite the list."
     end
   end
       

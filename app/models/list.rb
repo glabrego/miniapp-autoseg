@@ -24,4 +24,12 @@ class List < ApplicationRecord
 
   end
 
+  def self.public_lists
+    where(public: true)
+  end
+
+  def self.my_lists(current_user)
+    where(user_id: current_user.id) 
+  end
+
 end

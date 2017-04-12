@@ -1,4 +1,5 @@
 module ValidatePresenceOf
+	
 	class Matcher
 		def initializer(attribute)
 			@attribute = attribute
@@ -12,7 +13,7 @@ module ValidatePresenceOf
 	end
 
 	def validate_presence_of(attribute)
-		Matcher.new(attribute)
+		Matcher.new attribute
 	end
 
 	def failure_message
