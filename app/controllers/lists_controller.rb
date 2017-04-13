@@ -2,6 +2,7 @@ class ListsController < ApplicationController
   
   before_action :set_list, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index]
+  before_action :permission, only: [:edit, :update, :destroy]
 
   def index
     @public_lists = List.public_lists
@@ -12,7 +13,10 @@ class ListsController < ApplicationController
   end
 
   def show
-    
+    if @list.public
+    else
+      permission
+    end
   end
 
   def new
@@ -21,6 +25,7 @@ class ListsController < ApplicationController
   end
 
   def edit
+
   end
 
   def create
@@ -64,6 +69,7 @@ class ListsController < ApplicationController
   end
 
   def destroy
+
   	@list.destroy
   	redirect_to lists_url, notice: "List was successfuly removed!"
   end
@@ -90,6 +96,12 @@ class ListsController < ApplicationController
 
   def list_params
   	params.require(:list).permit(:title, :public, :close, todos_attributes: Todo.attribute_names.map(&:to_sym).push(:_destroy))
+  end
+
+  def permission
+    unless @list.is_allowed?(@list, current_user)
+      redirect_to root_url, notice: "User not allowed to do this action."
+    end
   end
 
 end

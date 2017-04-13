@@ -24,6 +24,14 @@ class List < ApplicationRecord
 
   end
 
+  def is_allowed?(list, user)
+    if list.user_id == user.id
+      true
+    else
+      false
+    end
+  end
+
   def self.public_lists
     where(public: true)
   end

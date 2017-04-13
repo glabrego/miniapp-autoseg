@@ -15,7 +15,9 @@
     </ul>
     <ul>
         <td><strong>Last update:</strong></td>
-        <td><%= @list.updated_at > @list.todos.order("updated_at").last.updated_at ? @list.updated_at : @list.todos.order("updated_at").last.updated_at %></td>
+        <% if @list.todos.exists? %>
+            <td><%= @list.updated_at > @list.todos.order("updated_at").last.updated_at ? @list.updated_at : @list.todos.order("updated_at").last.updated_at %></td>
+        <% end %>
     </ul>
 </div>
 <br/>
